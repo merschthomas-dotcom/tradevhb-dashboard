@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TradeVHB · Investor Dashboard</title>
+  <meta name="tradevhb-snapshot-id" content="phase20_v2-20260912T150109200181Z-b2e21a6f" />
+  <style>
+
+:root {
+  --bg0: #061018;
+  --bg1: #0c1a2c;
+  --panel: rgba(12, 22, 36, 0.86);
+  --panel-2: rgba(16, 28, 44, 0.82);
+  --line: rgba(148, 163, 184, 0.13);
+  --text: #e8eef7;
+  --muted: #8b9bb3;
+  --gold: #c9a227;
+  --gold-soft: rgba(201, 162, 39, 0.14);
+  --blue: #5b7c99;
+  --up: #3d9a6a;
+  --down: #c45b5b;
+  --radius: 18px;
+  --shadow: 0 20px 55px rgba(0, 0, 0, 0.38);
+  --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg0);
+  background-image:
+    radial-gradient(920px 480px at 18% -6%, rgba(96, 140, 196, 0.18), transparent 56%),
+    radial-gradient(760px 420px at 88% 8%, rgba(70, 120, 180, 0.10), transparent 54%),
+    radial-gradient(640px 380px at 50% 108%, rgba(20, 40, 70, 0.35), transparent 62%),
+    linear-gradient(165deg, #10243a 0%, #0b1a2c 38%, #07131f 72%, #050d16 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100%;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.028;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.55) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 18%, transparent 78%);
+}
+.page {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.75rem 0 3rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.brand-name {
+  font-size: 1.85rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+.brand-subline {
+  margin-top: 0.35rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem 0.55rem;
+}
+.brand-sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.brand-sep {
+  color: rgba(139, 155, 179, 0.55);
+  font-size: 0.9rem;
+}
+.brand-by {
+  color: rgba(201, 162, 39, 0.88);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+.brand-by strong {
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: #d4b44a;
+}
+.header-meta { text-align: right; }
+.meta-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.meta-value { margin-top: 0.2rem; font-size: 1rem; }
+.section { margin: 1.75rem 0; }
+.section-title {
+  margin: 0 0 0.9rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.card {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.025), transparent 42%),
+    var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.35rem 1.4rem;
+  backdrop-filter: blur(12px);
+}
+.featured-card {
+  border-color: rgba(201, 162, 39, 0.16);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42);
+}
+.card-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.positions-card {
+  padding: 0;
+  overflow: hidden;
+}
+.positions-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.25rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.positions-toggle:hover {
+  background: rgba(255,255,255,0.025);
+}
+.positions-toggle:focus-visible {
+  outline: 2px solid rgba(201, 162, 39, 0.45);
+  outline-offset: -2px;
+}
+.positions-title {
+  margin: 0;
+}
+.positions-toggle-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.positions-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.positions-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  background: rgba(201, 162, 39, 0.08);
+  color: #d4b44a;
+  font-size: 0.78rem;
+  line-height: 1;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.positions-toggle[aria-expanded="true"] .positions-chevron {
+  transform: rotate(180deg);
+  background: rgba(201, 162, 39, 0.14);
+}
+.positions-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease;
+}
+.positions-panel[data-open="1"] {
+  grid-template-rows: 1fr;
+}
+.positions-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.positions-panel[data-open="1"] .positions-panel-inner {
+  padding: 0 1.25rem 1.25rem;
+}
+.executive .hero-kpi {
+  margin-bottom: 1.25rem;
+}
+.kpi-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.kpi-hero {
+  margin-top: 0.35rem;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+.kpi-card {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.05rem;
+}
+.kpi-value {
+  margin-top: 0.45rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.kpi-sub {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.status-line {
+  margin-top: 1.1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(201, 162, 39, 0.06);
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.chart-card .chart-placeholder {
+  position: relative;
+  min-height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px dashed rgba(148, 163, 184, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(148,163,184,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,0.08) 1px, transparent 1px);
+  background-size: 100% 36px, 48px 100%;
+  opacity: 0.55;
+}
+.chart-note {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--muted);
+  text-align: center;
+  max-width: 28rem;
+  padding: 1rem;
+  line-height: 1.45;
+}
+.range-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+}
+.range-btn {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.range-btn.active {
+  color: var(--text);
+  border-color: rgba(201, 162, 39, 0.45);
+  background: var(--gold-soft);
+}
+.chart-stage {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+#depot-chart {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(10, 14, 22, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  color: var(--text);
+  font-size: 0.82rem;
+  box-shadow: var(--shadow);
+  z-index: 5;
+  white-space: nowrap;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.alloc-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.alloc-svg { width: 150px; height: 150px; }
+.alloc-center {
+  fill: var(--text);
+  font-size: 16px;
+  font-weight: 650;
+  font-family: var(--font);
+}
+.alloc-center-sub {
+  fill: var(--muted);
+  font-size: 10px;
+  font-family: var(--font);
+}
+.alloc-legend { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+.dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  margin-right: 0.45rem;
+}
+.dot.gold { background: var(--gold); }
+.dot.blue { background: var(--blue); }
+.bar-list { display: grid; gap: 0.65rem; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+}
+.bar-label { color: var(--muted); font-size: 0.85rem; }
+.bar-track {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--blue);
+}
+.bar-fill.r1 { background: #3d9a6a; }
+.bar-fill.r2 { background: #4f8f78; }
+.bar-fill.r3 { background: #c9a227; }
+.bar-fill.r4 { background: #c4813d; }
+.bar-fill.r5 { background: #c45b5b; }
+.bar-fill.profile { background: linear-gradient(90deg, #5b7c99, #c9a227); }
+.bar-meta { color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
+.quality-score {
+  font-size: 2.6rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.quality-grade {
+  margin-top: 0.35rem;
+  color: var(--gold);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.gap-value {
+  font-size: 2rem;
+  font-weight: 650;
+}
+.gap-hint, .gap-reason {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.03);
+}
+.cls-strong { color: #8fd6b0; background: rgba(61,154,106,0.12); }
+.cls-keep { color: #9fcbb3; background: rgba(61,154,106,0.08); }
+.cls-watch { color: #e6d39a; background: rgba(201,162,39,0.12); }
+.cls-check { color: #e0b48a; background: rgba(196,129,61,0.12); }
+.cls-remove { color: #e3a0a0; background: rgba(196,91,91,0.12); }
+.cls-neutral { color: var(--muted); }
+.intel-card .intel-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+.intel-card .intel-row:last-child { border-bottom: 0; }
+.intel-card .intel-row strong { color: var(--text); font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+.pos-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+.pos-table th {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.pos-table td {
+  padding: 0.85rem 0.6rem;
+  border-bottom: 1px solid rgba(148,163,184,0.08);
+  font-size: 0.95rem;
+}
+.pos-table tr.pos-row { cursor: pointer; }
+.pos-table tr.pos-row:hover { background: rgba(255,255,255,0.025); }
+.pos-table .sym { font-weight: 650; letter-spacing: 0.02em; }
+.dir-up { color: var(--up); }
+.dir-down { color: var(--down); }
+.dir-neutral { color: var(--muted); }
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+.stat-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.stat-value {
+  margin-top: 0.4rem;
+  font-size: 1.35rem;
+  font-weight: 650;
+}
+.subgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.mini-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-bottom: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.funnel { display: grid; gap: 0.35rem; justify-items: center; }
+.funnel-step {
+  width: min(100%, 420px);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+}
+.funnel-label { color: var(--muted); }
+.funnel-value { font-weight: 650; }
+.funnel-arrow { color: var(--muted); opacity: 0.7; }
+.act-row {
+  display: grid;
+  grid-template-columns: 11rem 5rem 1fr;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(148,163,184,0.08);
+  align-items: center;
+}
+.act-row:last-child { border-bottom: 0; }
+.act-date { color: var(--muted); font-size: 0.85rem; }
+.act-sym { font-weight: 650; }
+.act-action { color: var(--muted); }
+.footer {
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+}
+.empty, .muted { color: var(--muted); }
+.drawer[hidden] { display: none; }
+.drawer { position: fixed; inset: 0; z-index: 40; }
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+.drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(420px, 100%);
+  height: 100%;
+  background: #0e1522;
+  border-left: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  overflow: auto;
+}
+.drawer-close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.9rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.drawer-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.drawer-grid div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+.drawer-grid strong { color: var(--text); font-weight: 600; }
+.drawer-title {
+  font-size: 1.5rem;
+  font-weight: 650;
+  margin: 0;
+}
+@media (max-width: 960px) {
+  .kpi-grid, .two-col, .stat-grid, .subgrid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .page { width: calc(100% - 1.25rem); padding-top: 1.1rem; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .header-meta { text-align: left; }
+  .brand-subline { gap: 0.25rem 0.45rem; }
+  .kpi-grid, .two-col, .stat-grid, .subgrid { grid-template-columns: 1fr; }
+  .act-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .hide-sm { display: none; }
+  .bar-row { grid-template-columns: 2.6rem 1fr; }
+  .bar-meta { display: none; }
+  .positions-toggle {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .positions-toggle-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header class="header" title="phase20_v2-20260912T150109200181Z-b2e21a6f">
+      <div class="brand">
+        <div class="brand-name">TradeVHB</div>
+        <div class="brand-subline">
+          <span class="brand-sub">Intelligentes Portfolio Management</span>
+          <span class="brand-sep" aria-hidden="true">·</span>
+          <span class="brand-by">by <strong>TOMMI</strong></span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <div class="meta-label">Datenstand</div>
+        <div class="meta-value">12.09.2026 · 15:01 Uhr UTC</div>
+      </div>
+    </header>
+
+    <section class="section executive">
+      <div class="hero-kpi">
+        <div class="kpi-label">Depotwert</div>
+        <div class="kpi-hero">99.317,76 EUR</div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Gesamtrendite</div>
+          <div class="kpi-value dir-down">↓ -0,68 %</div><div class="kpi-sub">-682,24 EUR</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Investiert</div>
+          <div class="kpi-value">29.451,67 EUR</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Cash</div>
+          <div class="kpi-value">69.866,09 EUR</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Positionen</div>
+          <div class="kpi-value">15</div>
+        </div>
+      </div>
+      <div class="status-line">TradeVHB bereit · Letzter Analysezyklus 12.09.2026 · 15:01 Uhr UTC</div>
+    </section>
+
+    <section class="section" id="depot-development">
+      <div class="card chart-card featured-card">
+        <div class="card-title">Depotentwicklung</div>
+        
+        <div class="range-row" role="tablist" aria-label="Zeitraum"><button type="button" class="range-btn" data-range="1T">Tag</button><button type="button" class="range-btn" data-range="1W">Woche</button><button type="button" class="range-btn active" data-range="1M">Monat</button><button type="button" class="range-btn" data-range="1J">Jahr</button><button type="button" class="range-btn" data-range="ALL">All</button></div>
+        <div class="chart-stage">
+          <svg id="depot-chart" viewBox="0 0 800 280" preserveAspectRatio="none" role="img" aria-label="Depotwert über Zeit"></svg>
+          <div id="chart-tooltip" class="chart-tooltip" hidden></div>
+        </div>
+        <script type="application/json" id="tradevhb-history-data">{"points": [{"t": "2025-01-02T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-03T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-06T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-07T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-08T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-10T00:00:00+00:00", "v": 100000.0}, {"t": "2025-01-13T00:00:00+00:00", "v": 100057.2419}, {"t": "2025-01-14T00:00:00+00:00", "v": 99954.7553}, {"t": "2025-01-15T00:00:00+00:00", "v": 100374.7675}, {"t": "2025-01-16T00:00:00+00:00", "v": 99495.3956}, {"t": "2025-01-17T00:00:00+00:00", "v": 99652.7858}, {"t": "2025-01-21T00:00:00+00:00", "v": 98981.1323}, {"t": "2025-01-22T00:00:00+00:00", "v": 99090.0244}, {"t": "2025-01-23T00:00:00+00:00", "v": 99229.8652}, {"t": "2025-01-24T00:00:00+00:00", "v": 99052.2315}, {"t": "2025-01-27T00:00:00+00:00", "v": 99351.9686}, {"t": "2025-01-28T00:00:00+00:00", "v": 100583.8075}, {"t": "2025-01-29T00:00:00+00:00", "v": 100506.0042}, {"t": "2025-01-30T00:00:00+00:00", "v": 99342.1723}, {"t": "2025-01-31T00:00:00+00:00", "v": 99199.243}, {"t": "2025-02-03T00:00:00+00:00", "v": 98320.5184}, {"t": "2025-02-04T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-05T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-06T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-07T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-10T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-11T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-12T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-13T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-14T00:00:00+00:00", "v": 98229.1853}, {"t": "2025-02-18T00:00:00+00:00", "v": 98234.755}, {"t": "2025-02-19T00:00:00+00:00", "v": 98269.4061}, {"t": "2025-02-20T00:00:00+00:00", "v": 98352.5688}, {"t": "2025-02-21T00:00:00+00:00", "v": 98328.313}, {"t": "2025-02-24T00:00:00+00:00", "v": 98462.5861}, {"t": "2025-02-25T00:00:00+00:00", "v": 98457.3884}, {"t": "2025-02-26T00:00:00+00:00", "v": 97878.7147}, {"t": "2025-02-27T00:00:00+00:00", "v": 97613.6337}, {"t": "2025-02-28T00:00:00+00:00", "v": 98006.9239}, {"t": "2025-03-03T00:00:00+00:00", "v": 97676.8719}, {"t": "2025-03-04T00:00:00+00:00", "v": 97494.9536}, {"t": "2025-03-05T00:00:00+00:00", "v": 97478.4943}, {"t": "2025-03-06T00:00:00+00:00", "v": 97442.9769}, {"t": "2025-03-07T00:00:00+00:00", "v": 97766.9649}, {"t": "2025-03-10T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-11T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-12T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-13T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-14T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-17T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-18T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-19T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-20T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-21T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-24T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-25T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-26T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-27T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-28T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-03-31T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-01T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-02T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-03T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-04T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-07T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-08T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-09T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-10T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-11T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-14T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-15T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-16T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-17T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-21T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-22T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-23T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-24T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-25T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-28T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-29T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-04-30T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-05-01T00:00:00+00:00", "v": 96725.5044}, {"t": "2025-05-02T00:00:00+00:00", "v": 96872.563}, {"t": "2025-05-05T00:00:00+00:00", "v": 96914.9572}, {"t": "2025-05-06T00:00:00+00:00", "v": 96778.7242}, {"t": "2025-05-07T00:00:00+00:00", "v": 96780.6296}, {"t": "2025-05-08T00:00:00+00:00", "v": 97010.225}, {"t": "2025-05-09T00:00:00+00:00", "v": 97036.9}, {"t": "2025-05-12T00:00:00+00:00", "v": 97538.485}, {"t": "2025-05-13T00:00:00+00:00", "v": 97532.769}, {"t": "2025-05-14T00:00:00+00:00", "v": 97713.7778}, {"t": "2025-05-15T00:00:00+00:00", "v": 97762.3644}, {"t": "2025-05-16T00:00:00+00:00", "v": 97718.9491}, {"t": "2025-05-19T00:00:00+00:00", "v": 97755.5062}, {"t": "2025-05-20T00:00:00+00:00", "v": 97580.4547}, {"t": "2025-05-21T00:00:00+00:00", "v": 96961.3128}, {"t": "2025-05-22T00:00:00+00:00", "v": 97016.739}, {"t": "2025-05-23T00:00:00+00:00", "v": 96210.4198}, {"t": "2025-05-27T00:00:00+00:00", "v": 96711.9692}, {"t": "2025-05-28T00:00:00+00:00", "v": 96553.0577}, {"t": "2025-05-29T00:00:00+00:00", "v": 96616.0496}, {"t": "2025-05-30T00:00:00+00:00", "v": 96696.2212}, {"t": "2025-06-02T00:00:00+00:00", "v": 96773.0523}, {"t": "2025-06-03T00:00:00+00:00", "v": 96820.7734}, {"t": "2025-06-04T00:00:00+00:00", "v": 96863.7225}, {"t": "2025-06-05T00:00:00+00:00", "v": 97045.5401}, {"t": "2025-06-06T00:00:00+00:00", "v": 97174.3872}, {"t": "2025-06-09T00:00:00+00:00", "v": 97287.4863}, {"t": "2025-06-10T00:00:00+00:00", "v": 97200.1566}, {"t": "2025-06-11T00:00:00+00:00", "v": 97281.2826}, {"t": "2025-06-12T00:00:00+00:00", "v": 97579.5398}, {"t": "2025-06-13T00:00:00+00:00", "v": 97392.9501}, {"t": "2025-06-16T00:00:00+00:00", "v": 97592.4246}, {"t": "2025-06-17T00:00:00+00:00", "v": 97539.9313}, {"t": "2025-06-18T00:00:00+00:00", "v": 97644.9178}, {"t": "2025-06-20T00:00:00+00:00", "v": 97509.3897}, {"t": "2025-06-23T00:00:00+00:00", "v": 97919.7917}, {"t": "2025-06-24T00:00:00+00:00", "v": 98115.9257}, {"t": "2025-06-25T00:00:00+00:00", "v": 98219.0034}, {"t": "2025-06-26T00:00:00+00:00", "v": 98466.199}, {"t": "2025-06-27T00:00:00+00:00", "v": 98394.14}, {"t": "2025-06-30T00:00:00+00:00", "v": 98464.2901}, {"t": "2025-07-01T00:00:00+00:00", "v": 98208.5047}, {"t": "2025-07-02T00:00:00+00:00", "v": 98162.6924}, {"t": "2025-07-03T00:00:00+00:00", "v": 98617.1518}, {"t": "2025-07-07T00:00:00+00:00", "v": 98305.2946}, {"t": "2025-07-08T00:00:00+00:00", "v": 98257.1082}, {"t": "2025-07-09T00:00:00+00:00", "v": 98667.0188}, {"t": "2025-07-10T00:00:00+00:00", "v": 98661.306}, {"t": "2025-07-11T00:00:00+00:00", "v": 98659.3874}, {"t": "2025-07-14T00:00:00+00:00", "v": 98462.7489}, {"t": "2025-07-15T00:00:00+00:00", "v": 98631.5405}, {"t": "2025-07-16T00:00:00+00:00", "v": 98697.3657}, {"t": "2025-07-17T00:00:00+00:00", "v": 98977.4611}, {"t": "2025-07-18T00:00:00+00:00", "v": 98981.9864}, {"t": "2025-07-21T00:00:00+00:00", "v": 99075.7782}, {"t": "2025-07-22T00:00:00+00:00", "v": 98985.0122}, {"t": "2025-07-23T00:00:00+00:00", "v": 98995.6998}, {"t": "2025-07-24T00:00:00+00:00", "v": 99206.7884}, {"t": "2025-07-25T00:00:00+00:00", "v": 99350.453}, {"t": "2025-07-28T00:00:00+00:00", "v": 99304.913}, {"t": "2025-07-29T00:00:00+00:00", "v": 99108.704}, {"t": "2025-07-30T00:00:00+00:00", "v": 98981.3247}, {"t": "2025-07-31T00:00:00+00:00", "v": 99841.9204}, {"t": "2025-08-01T00:00:00+00:00", "v": 99021.2784}, {"t": "2025-08-04T00:00:00+00:00", "v": 99708.3588}, {"t": "2025-08-05T00:00:00+00:00", "v": 99331.8389}, {"t": "2025-08-06T00:00:00+00:00", "v": 99197.7424}, {"t": "2025-08-07T00:00:00+00:00", "v": 99002.0857}, {"t": "2025-08-08T00:00:00+00:00", "v": 99059.3511}, {"t": "2025-08-11T00:00:00+00:00", "v": 98980.7382}, {"t": "2025-08-12T00:00:00+00:00", "v": 99502.3893}, {"t": "2025-08-13T00:00:00+00:00", "v": 99335.2134}, {"t": "2025-08-14T00:00:00+00:00", "v": 99389.1039}, {"t": "2025-08-15T00:00:00+00:00", "v": 99199.2903}, {"t": "2025-08-18T00:00:00+00:00", "v": 99005.9758}, {"t": "2025-08-19T00:00:00+00:00", "v": 98634.112}, {"t": "2025-08-20T00:00:00+00:00", "v": 98136.5732}, {"t": "2025-08-21T00:00:00+00:00", "v": 98031.3264}, {"t": "2025-08-22T00:00:00+00:00", "v": 98365.5018}, {"t": "2025-08-25T00:00:00+00:00", "v": 98183.4134}, {"t": "2025-08-26T00:00:00+00:00", "v": 98221.073}, {"t": "2025-08-27T00:00:00+00:00", "v": 98524.6407}, {"t": "2025-08-28T00:00:00+00:00", "v": 98801.6851}, {"t": "2025-08-29T00:00:00+00:00", "v": 98632.5897}, {"t": "2025-09-02T00:00:00+00:00", "v": 98395.7137}, {"t": "2025-09-03T00:00:00+00:00", "v": 98892.1878}, {"t": "2025-09-04T00:00:00+00:00", "v": 98979.7902}, {"t": "2025-09-05T00:00:00+00:00", "v": 98973.7717}, {"t": "2025-09-08T00:00:00+00:00", "v": 98852.7332}, {"t": "2025-09-09T00:00:00+00:00", "v": 98616.6747}, {"t": "2025-09-10T00:00:00+00:00", "v": 98111.1217}, {"t": "2025-09-11T00:00:00+00:00", "v": 98327.7873}, {"t": "2025-09-12T00:00:00+00:00", "v": 98597.9505}, {"t": "2025-09-15T00:00:00+00:00", "v": 98773.8242}, {"t": "2025-09-16T00:00:00+00:00", "v": 98870.7887}, {"t": "2025-09-17T00:00:00+00:00", "v": 98926.9613}, {"t": "2025-09-18T00:00:00+00:00", "v": 98852.7332}, {"t": "2025-09-19T00:00:00+00:00", "v": 99362.2986}, {"t": "2025-09-22T00:00:00+00:00", "v": 100069.8054}, {"t": "2025-09-23T00:00:00+00:00", "v": 99959.4664}, {"t": "2025-09-24T00:00:00+00:00", "v": 99817.6976}, {"t": "2025-09-25T00:00:00+00:00", "v": 100122.6343}, {"t": "2025-09-26T00:00:00+00:00", "v": 100028.3447}, {"t": "2025-09-29T00:00:00+00:00", "v": 99959.4664}, {"t": "2025-09-30T00:00:00+00:00", "v": 99972.8408}, {"t": "2025-10-01T00:00:00+00:00", "v": 100027.6759}, {"t": "2025-10-02T00:00:00+00:00", "v": 100140.0211}, {"t": "2025-10-03T00:00:00+00:00", "v": 100199.5372}, {"t": "2025-10-06T00:00:00+00:00", "v": 100110.5973}, {"t": "2025-10-07T00:00:00+00:00", "v": 99936.7214}, {"t": "2025-10-08T00:00:00+00:00", "v": 100070.9695}, {"t": "2025-10-09T00:00:00+00:00", "v": 99721.6311}, {"t": "2025-10-10T00:00:00+00:00", "v": 98759.2181}, {"t": "2025-10-13T00:00:00+00:00", "v": 99020.5869}, {"t": "2025-10-14T00:00:00+00:00", "v": 99012.1689}, {"t": "2025-10-15T00:00:00+00:00", "v": 99112.5574}, {"t": "2025-10-16T00:00:00+00:00", "v": 98926.3597}, {"t": "2025-10-17T00:00:00+00:00", "v": 99314.7594}, {"t": "2025-10-20T00:00:00+00:00", "v": 100085.6247}, {"t": "2025-10-21T00:00:00+00:00", "v": 100149.6572}, {"t": "2025-10-22T00:00:00+00:00", "v": 99955.4131}, {"t": "2025-10-23T00:00:00+00:00", "v": 100031.6358}, {"t": "2025-10-24T00:00:00+00:00", "v": 100348.5314}, {"t": "2025-10-27T00:00:00+00:00", "v": 101009.0361}, {"t": "2025-10-28T00:00:00+00:00", "v": 101368.4391}, {"t": "2025-10-29T00:00:00+00:00", "v": 101398.1611}, {"t": "2025-10-30T00:00:00+00:00", "v": 100992.948}, {"t": "2025-10-31T00:00:00+00:00", "v": 100662.8144}, {"t": "2025-11-03T00:00:00+00:00", "v": 100548.9107}, {"t": "2025-11-04T00:00:00+00:00", "v": 100526.3858}, {"t": "2025-11-05T00:00:00+00:00", "v": 100297.4503}, {"t": "2025-11-06T00:00:00+00:00", "v": 100205.7945}, {"t": "2025-11-07T00:00:00+00:00", "v": 100118.8607}, {"t": "2025-11-10T00:00:00+00:00", "v": 100200.4447}, {"t": "2025-11-11T00:00:00+00:00", "v": 100590.0159}, {"t": "2025-11-12T00:00:00+00:00", "v": 100470.8687}, {"t": "2025-11-13T00:00:00+00:00", "v": 100436.0616}, {"t": "2025-11-14T00:00:00+00:00", "v": 100399.9158}, {"t": "2025-11-17T00:00:00+00:00", "v": 100068.5795}, {"t": "2025-11-18T00:00:00+00:00", "v": 100067.2408}, {"t": "2025-11-19T00:00:00+00:00", "v": 100142.2098}, {"t": "2025-11-20T00:00:00+00:00", "v": 99987.5862}, {"t": "2025-11-21T00:00:00+00:00", "v": 100338.3341}, {"t": "2025-11-24T00:00:00+00:00", "v": 100634.8634}, {"t": "2025-11-25T00:00:00+00:00", "v": 100705.1469}, {"t": "2025-11-26T00:00:00+00:00", "v": 100743.9701}, {"t": "2025-11-28T00:00:00+00:00", "v": 100830.9877}, {"t": "2025-12-01T00:00:00+00:00", "v": 101115.4684}, {"t": "2025-12-01T05:00:00+00:00", "v": 101133.4093}, {"t": "2025-12-02T00:00:00+00:00", "v": 101322.3026}, {"t": "2025-12-02T05:00:00+00:00", "v": 101340.4393}, {"t": "2025-12-03T00:00:00+00:00", "v": 101185.7518}, {"t": "2025-12-03T05:00:00+00:00", "v": 101203.7593}, {"t": "2025-12-04T00:00:00+00:00", "v": 100954.8205}, {"t": "2025-12-04T05:00:00+00:00", "v": 100972.6093}, {"t": "2025-12-05T00:00:00+00:00", "v": 100826.3021}, {"t": "2025-12-05T05:00:00+00:00", "v": 100843.9693}, {"t": "2025-12-08T00:00:00+00:00", "v": 100766.7285}, {"t": "2025-12-08T05:00:00+00:00", "v": 100784.3393}, {"t": "2025-12-09T00:00:00+00:00", "v": 100719.2035}, {"t": "2025-12-09T05:00:00+00:00", "v": 100736.7693}, {"t": "2025-12-10T00:00:00+00:00", "v": 100826.3021}, {"t": "2025-12-10T05:00:00+00:00", "v": 100843.9693}, {"t": "2025-12-11T00:00:00+00:00", "v": 100776.0997}, {"t": "2025-12-11T05:00:00+00:00", "v": 100793.7193}, {"t": "2025-12-12T00:00:00+00:00", "v": 100792.8338}, {"t": "2025-12-12T05:00:00+00:00", "v": 100810.4693}, {"t": "2025-12-15T00:00:00+00:00", "v": 100513.7081}, {"t": "2025-12-15T05:00:00+00:00", "v": 100531.0793}, {"t": "2025-12-16T00:00:00+00:00", "v": 100547.1764}, {"t": "2025-12-16T05:00:00+00:00", "v": 100564.5793}, {"t": "2025-12-17T00:00:00+00:00", "v": 100361.762}, {"t": "2025-12-17T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-18T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-18T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-19T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-19T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-22T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-22T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-23T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-23T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-24T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-24T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-26T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-26T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-29T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-29T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-30T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-30T05:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-31T00:00:00+00:00", "v": 100571.9543}, {"t": "2025-12-31T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-02T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-02T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-05T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-05T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-06T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-06T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-07T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-07T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-08T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-08T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-09T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-09T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-12T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-12T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-13T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-13T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-14T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-14T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-15T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-15T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-16T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-16T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-20T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-20T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-21T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-21T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-22T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-22T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-23T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-23T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-26T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-26T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-27T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-27T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-28T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-28T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-29T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-29T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-30T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-01-30T05:00:00+00:00", "v": 100571.9543}, {"t": "2026-02-02T00:00:00+00:00", "v": 100571.9543}, {"t": "2026-02-02T05:00:00+00:00", "v": 101367.9943}, {"t": "2026-02-03T00:00:00+00:00", "v": 101303.6331}, {"t": "2026-02-03T05:00:00+00:00", "v": 101324.5343}, {"t": "2026-02-04T00:00:00+00:00", "v": 101877.9094}, {"t": "2026-02-04T05:00:00+00:00", "v": 101899.3543}, {"t": "2026-02-05T00:00:00+00:00", "v": 101830.3944}, {"t": "2026-02-05T05:00:00+00:00", "v": 101851.7943}, {"t": "2026-02-06T00:00:00+00:00", "v": 102011.443}, {"t": "2026-02-06T05:00:00+00:00", "v": 102033.0143}, {"t": "2026-02-09T00:00:00+00:00", "v": 101746.0143}, {"t": "2026-02-09T05:00:00+00:00", "v": 101746.0143}, {"t": "2026-02-10T00:00:00+00:00", "v": 101668.9343}, {"t": "2026-02-10T05:00:00+00:00", "v": 101668.9343}, {"t": "2026-02-11T00:00:00+00:00", "v": 101818.1743}, {"t": "2026-02-11T05:00:00+00:00", "v": 101818.1743}, {"t": "2026-02-12T00:00:00+00:00", "v": 100689.0343}, {"t": "2026-02-12T05:00:00+00:00", "v": 100689.0343}, {"t": "2026-02-13T00:00:00+00:00", "v": 100201.1343}, {"t": "2026-02-13T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-17T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-17T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-18T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-18T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-19T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-19T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-20T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-20T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-23T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-23T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-24T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-24T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-25T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-25T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-26T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-26T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-27T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-02-27T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-02T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-02T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-03T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-03T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-04T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-04T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-05T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-05T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-06T00:00:00+00:00", "v": 100689.5103}, {"t": "2026-03-06T05:00:00+00:00", "v": 100689.5103}, {"t": "2026-09-12T15:01:10.872341+00:00", "v": 99317.7638, "source": "current_snapshot"}], "default_range": "1M", "currency": "EUR"}</script>
+        
+      </div>
+    </section>
+
+    
+    <section class="section" id="depot-positions">
+      <div class="card table-card positions-card">
+        <button type="button" class="positions-toggle" id="positions-toggle"
+          aria-expanded="false" aria-controls="positions-panel">
+          <span class="positions-toggle-left">
+            <span class="card-title positions-title">Depotpositionen</span>
+          </span>
+          <span class="positions-toggle-right">
+            <span class="positions-count">15 Positionen</span>
+            <span class="positions-chevron" aria-hidden="true">▼</span>
+          </span>
+        </button>
+        <div id="positions-panel" class="positions-panel" data-open="0">
+          <div class="positions-panel-inner">
+            <div class="table-wrap">
+              <table class="pos-table">
+                <thead>
+                  <tr>
+                    <th>Titel</th><th>Wert</th><th>Anteil</th><th>Rendite</th>
+                    <th>Risiko</th><th>Einschätzung</th><th class="hide-sm">Conviction</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="pos-row" data-idx="0"><td class="sym">PXS</td><td>2.563,98 EUR</td><td>2,6 %</td><td class="dir-up">↑ +28,40 %</td><td>R5</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">75</td></tr><tr class="pos-row" data-idx="1"><td class="sym">DAC</td><td>2.061,72 EUR</td><td>2,1 %</td><td class="dir-up">↑ +5,28 %</td><td>R5</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">86</td></tr><tr class="pos-row" data-idx="2"><td class="sym">ADM</td><td>2.019,88 EUR</td><td>2,0 %</td><td class="dir-up">↑ +2,26 %</td><td>R3</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">77</td></tr><tr class="pos-row" data-idx="3"><td class="sym">ACHC</td><td>2.006,14 EUR</td><td>2,0 %</td><td class="dir-up">↑ +1,04 %</td><td>R4</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">77</td></tr><tr class="pos-row" data-idx="4"><td class="sym">ACT</td><td>2.004,15 EUR</td><td>2,0 %</td><td class="dir-up">↑ +0,40 %</td><td>R2</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">78</td></tr><tr class="pos-row" data-idx="5"><td class="sym">AEG</td><td>1.985,20 EUR</td><td>2,0 %</td><td class="dir-up">↑ +0,28 %</td><td>R3</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">83</td></tr><tr class="pos-row" data-idx="6"><td class="sym">VOYA</td><td>1.962,58 EUR</td><td>2,0 %</td><td class="dir-up">↑ +0,71 %</td><td>R1</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">78</td></tr><tr class="pos-row" data-idx="7"><td class="sym">ADI</td><td>1.960,56 EUR</td><td>2,0 %</td><td class="dir-up">↑ +4,43 %</td><td>R4</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">84</td></tr><tr class="pos-row" data-idx="8"><td class="sym">ADEA</td><td>1.958,55 EUR</td><td>2,0 %</td><td class="dir-down">↓ -1,66 %</td><td>R5</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">73</td></tr><tr class="pos-row" data-idx="9"><td class="sym">AHR</td><td>1.941,30 EUR</td><td>2,0 %</td><td class="dir-down">↓ -1,07 %</td><td>R1</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">77</td></tr><tr class="pos-row" data-idx="10"><td class="sym">ACMR</td><td>1.925,47 EUR</td><td>1,9 %</td><td class="dir-down">↓ -3,07 %</td><td>R1</td><td><span class="chip cls-watch">Beobachten</span></td><td class="hide-sm">48</td></tr><tr class="pos-row" data-idx="11"><td class="sym">ADAM</td><td>1.874,15 EUR</td><td>1,9 %</td><td class="dir-down">↓ -6,25 %</td><td>R1</td><td><span class="chip cls-keep">Halten</span></td><td class="hide-sm">66</td></tr><tr class="pos-row" data-idx="12"><td class="sym">HUM</td><td>1.767,60 EUR</td><td>1,8 %</td><td class="dir-up">↑ +5,40 %</td><td>R3</td><td><span class="chip cls-strong">Stark halten</span></td><td class="hide-sm">80</td></tr><tr class="pos-row" data-idx="13"><td class="sym">ACRS</td><td>1.757,73 EUR</td><td>1,8 %</td><td class="dir-down">↓ -12,12 %</td><td>R5</td><td><span class="chip cls-keep">Halten</span></td><td class="hide-sm">62</td></tr><tr class="pos-row" data-idx="14"><td class="sym">ACHV</td><td>1.662,68 EUR</td><td>1,7 %</td><td class="dir-down">↓ -16,73 %</td><td>R1</td><td><span class="chip cls-watch">Beobachten</span></td><td class="hide-sm">46</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="section">
+      <h2 class="section-title">Portfolio auf einen Blick</h2>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Investiert vs. Cash</div>
+          
+    <div class="alloc-wrap">
+      <svg viewBox="0 0 140 140" class="alloc-svg" aria-label="Investiert versus Cash">
+        <circle cx="70" cy="70" r="54" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="14"/>
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#c9a227" stroke-width="14"
+          stroke-dasharray="100.61 238.68" stroke-dashoffset="84.82"
+          stroke-linecap="butt" transform="rotate(-90 70 70)"/>
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#5b7c99" stroke-width="14"
+          stroke-dasharray="238.68 100.61" stroke-dashoffset="-15.79"
+          transform="rotate(-90 70 70)"/>
+        <text x="70" y="66" text-anchor="middle" class="alloc-center">30 %</text>
+        <text x="70" y="84" text-anchor="middle" class="alloc-center-sub">investiert</text>
+      </svg>
+      <div class="alloc-legend">
+        <div><span class="dot gold"></span>Investiert 29.451,67 EUR (29,7 %)</div>
+        <div><span class="dot blue"></span>Cash 69.866,09 EUR (70,3 %)</div>
+      </div>
+    </div>
+    
+        </div>
+        <div class="card">
+          <div class="card-title">Risk-Verteilung</div>
+          <div class="bar-list"><div class="bar-row"><span class="bar-label">R1</span><span class="bar-track"><span class="bar-fill r1" style="width:31.80%"></span></span><span class="bar-meta">5 · 32 %</span></div><div class="bar-row"><span class="bar-label">R2</span><span class="bar-track"><span class="bar-fill r2" style="width:6.80%"></span></span><span class="bar-meta">1 · 7 %</span></div><div class="bar-row"><span class="bar-label">R3</span><span class="bar-track"><span class="bar-fill r3" style="width:19.60%"></span></span><span class="bar-meta">3 · 20 %</span></div><div class="bar-row"><span class="bar-label">R4</span><span class="bar-track"><span class="bar-fill r4" style="width:13.47%"></span></span><span class="bar-meta">2 · 13 %</span></div><div class="bar-row"><span class="bar-label">R5</span><span class="bar-track"><span class="bar-fill r5" style="width:28.32%"></span></span><span class="bar-meta">4 · 28 %</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="two-col">
+        <div class="card quality-card featured-card">
+          <div class="card-title">TradeVHB Portfolioqualität</div>
+          <div class="quality-score">92 / 100</div><div class="quality-grade">A+</div>
+          <div class="chip-row" style="margin-top:1.25rem"><span class="chip cls-strong">Stark halten · 11</span><span class="chip cls-keep">Halten · 2</span><span class="chip cls-watch">Beobachten · 2</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Verbesserungspotenzial</div>
+          <div class="gap-reason">Kein belastbarer Vergleich im letzten Zyklus – es konnten keine frischen neuen Vergleichskandidaten außerhalb des Depots gebildet werden.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card intel-card featured-card">
+        <div class="card-title">TradeVHB Intelligence</div>
+        <div class="intel-row"><span>Portfolioqualität</span><strong>92 / 100</strong></div><div class="intel-row"><span>Top-Kandidaten</span><strong>18 von maximal 300</strong></div><div class="intel-row"><span>Champions</span><strong>13</strong></div><div class="intel-row"><span>Status</span><strong>TradeVHB bereit</strong></div><div class="intel-row"><span>Handlungsbedarf</span><strong>Kein akuter Handlungsbedarf</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">TradeVHB arbeitet gerade</h2>
+      <div class="stat-grid"><div class="stat-card"><div class="stat-label">Gesamtuniversum</div><div class="stat-value">12.216</div></div><div class="stat-card"><div class="stat-label">Investierbares Universum (frisch)</div><div class="stat-value">52</div></div><div class="stat-card"><div class="stat-label">Titel im letzten Zyklus</div><div class="stat-value">21</div></div><div class="stat-card"><div class="stat-label">Top-Kandidaten</div><div class="stat-value">18 von maximal 300</div></div><div class="stat-card"><div class="stat-label">Champions</div><div class="stat-value">13</div></div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Universe &amp; Ligen</h2>
+      <div class="card"><div class="funnel"><div class="funnel-step"><span class="funnel-label">Marktuniversum</span><span class="funnel-value">12.216</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Investierbar</span><span class="funnel-value">52</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Aktueller Durchlauf</span><span class="funnel-value">21</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Top-Kandidaten</span><span class="funnel-value">18 von max. 300</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Champions</span><span class="funnel-value">13</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Depotpositionen</span><span class="funnel-value">15</span></div></div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Letzte Aktivitäten</h2>
+      <div class="card"><div class="empty">Keine Titelbewegungen im aktuellen Datenstand.</div></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Risikoprofil</h2>
+      <div class="card"><div class="bar-list"><div class="bar-row"><span class="bar-label">R1–R2</span><span class="bar-track"><span class="bar-fill profile" style="width:38.61%"></span></span><span class="bar-meta">6 Pos. · 39 %</span></div><div class="bar-row"><span class="bar-label">R3</span><span class="bar-track"><span class="bar-fill profile" style="width:19.60%"></span></span><span class="bar-meta">3 Pos. · 20 %</span></div><div class="bar-row"><span class="bar-label">R4–R5</span><span class="bar-track"><span class="bar-fill profile" style="width:41.79%"></span></span><span class="bar-meta">6 Pos. · 42 %</span></div></div></div>
+    </section>
+
+    <footer class="footer">
+      TradeVHB Investor Dashboard · tradevhb_public_v1_2 · nur öffentlicher Datenausschnitt
+    </footer>
+
+    <div id="drawer" class="drawer" hidden>
+      <div class="drawer-backdrop" data-close="1"></div>
+      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-label="Positionsdetail">
+        <button class="drawer-close" type="button" data-close="1" aria-label="Schließen">×</button>
+        <div id="drawer-body"></div>
+      </aside>
+    </div>
+    <script type="application/json" id="tradevhb-position-details">[{"symbol": "PXS", "market_value": "2.563,98 EUR", "weight": "2,6 %", "return_pct": "\u2191 +28,40 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "75", "entry_at": "28.08.2026 \u00b7 18:25 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "DAC", "market_value": "2.061,72 EUR", "weight": "2,1 %", "return_pct": "\u2191 +5,28 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "86", "entry_at": "28.08.2026 \u00b7 15:21 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADM", "market_value": "2.019,88 EUR", "weight": "2,0 %", "return_pct": "\u2191 +2,26 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "09.09.2026 \u00b7 15:06 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACHC", "market_value": "2.006,14 EUR", "weight": "2,0 %", "return_pct": "\u2191 +1,04 %", "risk": "R4 \u00b7 Zweitriskanteste Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "06.09.2026 \u00b7 20:33 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACT", "market_value": "2.004,15 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,40 %", "risk": "R2 \u00b7 Zweitsicherste Liga", "classification": "Stark halten", "conviction": "78", "entry_at": "09.09.2026 \u00b7 02:30 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "AEG", "market_value": "1.985,20 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,28 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "83", "entry_at": "11.09.2026 \u00b7 10:30 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "VOYA", "market_value": "1.962,58 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,71 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Stark halten", "conviction": "78", "entry_at": "11.09.2026 \u00b7 11:37 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADI", "market_value": "1.960,56 EUR", "weight": "2,0 %", "return_pct": "\u2191 +4,43 %", "risk": "R4 \u00b7 Zweitriskanteste Liga", "classification": "Stark halten", "conviction": "84", "entry_at": "09.09.2026 \u00b7 13:00 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADEA", "market_value": "1.958,55 EUR", "weight": "2,0 %", "return_pct": "\u2193 -1,66 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "73", "entry_at": "09.09.2026 \u00b7 11:54 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "AHR", "market_value": "1.941,30 EUR", "weight": "2,0 %", "return_pct": "\u2193 -1,07 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "10.09.2026 \u00b7 18:40 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ACMR", "market_value": "1.925,47 EUR", "weight": "1,9 %", "return_pct": "\u2193 -3,07 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Beobachten", "conviction": "48", "entry_at": "07.09.2026 \u00b7 07:14 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ADAM", "market_value": "1.874,15 EUR", "weight": "1,9 %", "return_pct": "\u2193 -6,25 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Halten", "conviction": "66", "entry_at": "09.09.2026 \u00b7 05:43 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "HUM", "market_value": "1.767,60 EUR", "weight": "1,8 %", "return_pct": "\u2191 +5,40 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "80", "entry_at": "29.08.2026 \u00b7 01:35 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACRS", "market_value": "1.757,73 EUR", "weight": "1,8 %", "return_pct": "\u2193 -12,12 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Halten", "conviction": "62", "entry_at": "09.09.2026 \u00b7 01:25 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ACHV", "market_value": "1.662,68 EUR", "weight": "1,7 %", "return_pct": "\u2193 -16,73 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Beobachten", "conviction": "46", "entry_at": "07.09.2026 \u00b7 06:10 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}]</script>
+
+  </div>
+  <script id="tradevhb-public-export-meta" type="application/json">{"executive": {"cash": 69866.09, "depotwert": 99317.7638, "positions": 15}, "identity": {"business_snapshot_at": "2026-09-12T15:01:10.872341+00:00", "canonical_snapshot_id": "phase20_v2-20260912T150109200181Z-b2e21a6f", "exported_at": "2026-09-12T16:48:32.795916+00:00"}, "schema_version": "tradevhb_public_v1_2"}</script>
+  <script>
+
+(function () {
+  var drawer = document.getElementById("drawer");
+  var body = document.getElementById("drawer-body");
+  var raw = document.getElementById("tradevhb-position-details");
+  var details = [];
+  try { details = JSON.parse(raw ? raw.textContent || "[]" : "[]"); } catch (e) { details = []; }
+
+  function closeDrawer() {
+    if (!drawer) return;
+    drawer.hidden = true;
+  }
+
+  function openDrawer(idx) {
+    var item = details[idx];
+    if (!item || !drawer || !body) return;
+    body.innerHTML =
+      "<h3 class=\"drawer-title\">" + escapeHtml(item.symbol) + "</h3>" +
+      "<div class=\"drawer-grid\">" +
+      row("Wert", item.market_value) +
+      row("Depotanteil", item.weight) +
+      row("Rendite", item.return_pct, item.dir_class) +
+      row("Risiko", item.risk) +
+      row("Einschätzung", item.classification) +
+      row("Conviction", item.conviction) +
+      row("Einstieg", item.entry_at) +
+      row("Alternative", item.replacement) +
+      "</div>";
+    drawer.hidden = false;
+  }
+
+  function row(label, value, cls) {
+    var klass = cls ? " class=\"" + cls + "\"" : "";
+    return "<div><span>" + escapeHtml(label) + "</span><strong" + klass + ">" +
+      escapeHtml(value == null ? "—" : String(value)) + "</strong></div>";
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  document.querySelectorAll("tr.pos-row").forEach(function (tr) {
+    tr.addEventListener("click", function () {
+      openDrawer(Number(tr.getAttribute("data-idx")));
+    });
+  });
+  if (drawer) {
+    drawer.querySelectorAll("[data-close]").forEach(function (el) {
+      el.addEventListener("click", closeDrawer);
+    });
+  }
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape") closeDrawer();
+  });
+
+  initPositionsToggle();
+  initDepotChart();
+
+  function initPositionsToggle() {
+    var toggle = document.getElementById("positions-toggle");
+    var panel = document.getElementById("positions-panel");
+    if (!toggle || !panel) return;
+    toggle.addEventListener("click", function () {
+      var open = panel.getAttribute("data-open") === "1";
+      var next = !open;
+      panel.setAttribute("data-open", next ? "1" : "0");
+      toggle.setAttribute("aria-expanded", next ? "true" : "false");
+    });
+  }
+
+  function initDepotChart() {
+    var dataNode = document.getElementById("tradevhb-history-data");
+    var svg = document.getElementById("depot-chart");
+    var tip = document.getElementById("chart-tooltip");
+    if (!dataNode || !svg) return;
+    var payload = {};
+    try { payload = JSON.parse(dataNode.textContent || "{}"); } catch (e) { return; }
+    var allPoints = (payload.points || []).map(function (p) {
+      return { t: Date.parse(p.t), v: Number(p.v), rawT: p.t };
+    }).filter(function (p) { return isFinite(p.t) && isFinite(p.v); })
+      .sort(function (a, b) { return a.t - b.t; });
+    if (!allPoints.length) return;
+    var currency = payload.currency || "EUR";
+    var active = payload.default_range || "1M";
+    var buttons = document.querySelectorAll(".range-btn");
+
+    function filterRange(key) {
+      if (key === "ALL") return allPoints.slice();
+      var last = allPoints[allPoints.length - 1].t;
+      var ms = {
+        "1T": 24 * 3600 * 1000,
+        "1W": 7 * 24 * 3600 * 1000,
+        "1M": 30 * 24 * 3600 * 1000,
+        "1J": 365 * 24 * 3600 * 1000
+      }[key];
+      if (!ms) return allPoints.slice();
+      var start = last - ms;
+      return allPoints.filter(function (p) { return p.t >= start; });
+    }
+
+    function formatMoney(v) {
+      try {
+        return new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(v) + " " + currency;
+      } catch (e) {
+        return v.toFixed(2) + " " + currency;
+      }
+    }
+
+    function formatDate(ts) {
+      var d = new Date(ts);
+      var dd = String(d.getUTCDate()).padStart(2, "0");
+      var mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+      var yyyy = d.getUTCFullYear();
+      var hh = String(d.getUTCHours()).padStart(2, "0");
+      var mi = String(d.getUTCMinutes()).padStart(2, "0");
+      return dd + "." + mm + "." + yyyy + " · " + hh + ":" + mi + " UTC";
+    }
+
+    function render(rangeKey) {
+      var points = filterRange(rangeKey);
+      var w = 800, h = 280;
+      var pad = { l: 58, r: 18, t: 18, b: 36 };
+      var innerW = w - pad.l - pad.r;
+      var innerH = h - pad.t - pad.b;
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      if (!points.length) return;
+
+      var minV = points[0].v, maxV = points[0].v;
+      for (var i = 0; i < points.length; i++) {
+        if (points[i].v < minV) minV = points[i].v;
+        if (points[i].v > maxV) maxV = points[i].v;
+      }
+      var span = maxV - minV;
+      if (span <= 0) { minV -= 1; maxV += 1; span = maxV - minV; }
+      minV -= span * 0.08;
+      maxV += span * 0.08;
+      var minT = points[0].t, maxT = points[points.length - 1].t;
+      var tSpan = Math.max(maxT - minT, 1);
+
+      function x(t) { return pad.l + ((t - minT) / tSpan) * innerW; }
+      function y(v) { return pad.t + (1 - (v - minV) / (maxV - minV)) * innerH; }
+
+      // grid
+      for (var g = 0; g < 4; g++) {
+        var gy = pad.t + (innerH * g / 3);
+        var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", String(pad.l));
+        line.setAttribute("x2", String(w - pad.r));
+        line.setAttribute("y1", String(gy));
+        line.setAttribute("y2", String(gy));
+        line.setAttribute("stroke", "rgba(148,163,184,0.12)");
+        line.setAttribute("stroke-width", "1");
+        svg.appendChild(line);
+        var val = maxV - ((maxV - minV) * g / 3);
+        var label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", String(pad.l - 8));
+        label.setAttribute("y", String(gy + 3));
+        label.setAttribute("text-anchor", "end");
+        label.setAttribute("fill", "#8b9bb3");
+        label.setAttribute("font-size", "10");
+        label.textContent = formatMoney(val).replace(" " + currency, "");
+        svg.appendChild(label);
+      }
+
+      if (points.length === 1) {
+        var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("cx", String(x(points[0].t)));
+        c.setAttribute("cy", String(y(points[0].v)));
+        c.setAttribute("r", "4.5");
+        c.setAttribute("fill", "#c9a227");
+        svg.appendChild(c);
+      } else {
+        var d = "";
+        for (var p = 0; p < points.length; p++) {
+          d += (p === 0 ? "M" : "L") + x(points[p].t).toFixed(2) + " " + y(points[p].v).toFixed(2) + " ";
+        }
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d.trim());
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "#c9a227");
+        path.setAttribute("stroke-width", "2.2");
+        path.setAttribute("stroke-linejoin", "round");
+        path.setAttribute("stroke-linecap", "round");
+        svg.appendChild(path);
+      }
+
+      // hit area
+      var overlay = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      overlay.setAttribute("x", String(pad.l));
+      overlay.setAttribute("y", String(pad.t));
+      overlay.setAttribute("width", String(innerW));
+      overlay.setAttribute("height", String(innerH));
+      overlay.setAttribute("fill", "transparent");
+      svg.appendChild(overlay);
+
+      var marker = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      marker.setAttribute("r", "4");
+      marker.setAttribute("fill", "#e8eef7");
+      marker.setAttribute("stroke", "#c9a227");
+      marker.setAttribute("stroke-width", "2");
+      marker.style.display = "none";
+      svg.appendChild(marker);
+
+      function nearest(px) {
+        var best = 0, bestDist = Infinity;
+        for (var i = 0; i < points.length; i++) {
+          var dx = Math.abs(x(points[i].t) - px);
+          if (dx < bestDist) { bestDist = dx; best = i; }
+        }
+        return points[best];
+      }
+
+      function onMove(evt) {
+        var rect = svg.getBoundingClientRect();
+        var px = ((evt.clientX - rect.left) / rect.width) * w;
+        var pt = nearest(px);
+        marker.style.display = "block";
+        marker.setAttribute("cx", String(x(pt.t)));
+        marker.setAttribute("cy", String(y(pt.v)));
+        if (tip) {
+          tip.hidden = false;
+          tip.innerHTML = "<div>" + escapeHtml(formatDate(pt.t)) + "</div><strong>" +
+            escapeHtml(formatMoney(pt.v)) + "</strong>";
+          var localX = evt.clientX - rect.left;
+          var localY = evt.clientY - rect.top;
+          tip.style.left = Math.min(rect.width - 160, Math.max(8, localX + 12)) + "px";
+          tip.style.top = Math.max(8, localY - 48) + "px";
+        }
+      }
+      function onLeave() {
+        marker.style.display = "none";
+        if (tip) tip.hidden = true;
+      }
+      overlay.addEventListener("mousemove", onMove);
+      overlay.addEventListener("mouseleave", onLeave);
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        active = btn.getAttribute("data-range") || "1M";
+        buttons.forEach(function (b) { b.classList.toggle("active", b === btn); });
+        render(active);
+      });
+    });
+    render(active);
+  }
+})();
+
+  </script>
+</body>
+</html>
