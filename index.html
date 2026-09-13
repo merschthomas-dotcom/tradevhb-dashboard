@@ -514,6 +514,30 @@ body::before {
 .funnel-label { color: var(--muted); }
 .funnel-value { font-weight: 650; }
 .funnel-arrow { color: var(--muted); opacity: 0.7; }
+.funnel-note {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: center;
+}
+.funnel-coverage {
+  width: min(100%, 420px);
+  margin: -0.1rem 0 0.15rem;
+}
+.funnel-coverage-track {
+  display: block;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.funnel-coverage-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5b7c99, #c9a227);
+}
 .act-row {
   display: grid;
   grid-template-columns: 11rem 5rem 1fr;
@@ -647,7 +671,7 @@ body::before {
           <div class="kpi-value">15</div>
         </div>
       </div>
-      <div class="status-line">TradeVHB pausiert · Letzter Analysezyklus 13.09.2026 · 06:11 Uhr UTC</div>
+      <div class="status-line">TradeVHB bereit · Letzter Analysezyklus 13.09.2026 · 06:11 Uhr UTC</div>
     </section>
 
     <section class="section" id="depot-development">
@@ -747,18 +771,18 @@ body::before {
     <section class="section">
       <div class="card intel-card featured-card">
         <div class="card-title">TradeVHB Intelligence</div>
-        <div class="intel-row"><span>Portfolioqualität</span><strong>92 / 100</strong></div><div class="intel-row"><span>Top-Kandidaten</span><strong>18 von maximal 300</strong></div><div class="intel-row"><span>Champions</span><strong>13</strong></div><div class="intel-row"><span>Status</span><strong>TradeVHB pausiert</strong></div><div class="intel-row"><span>Handlungsbedarf</span><strong>Kein akuter Handlungsbedarf</strong></div>
+        <div class="intel-row"><span>Portfolioqualität</span><strong>92 / 100</strong></div><div class="intel-row"><span>Top-Kandidaten</span><strong>18</strong></div><div class="intel-row"><span>Champions</span><strong>13</strong></div><div class="intel-row"><span>Status</span><strong>TradeVHB bereit</strong></div><div class="intel-row"><span>Handlungsbedarf</span><strong>Kein akuter Handlungsbedarf</strong></div>
       </div>
     </section>
 
     <section class="section">
       <h2 class="section-title">TradeVHB arbeitet gerade</h2>
-      <div class="stat-grid"><div class="stat-card"><div class="stat-label">Gesamtuniversum</div><div class="stat-value">12.216</div></div><div class="stat-card"><div class="stat-label">Investierbares Universum (frisch)</div><div class="stat-value">58</div></div><div class="stat-card"><div class="stat-label">Titel im letzten Zyklus</div><div class="stat-value">21</div></div><div class="stat-card"><div class="stat-label">Top-Kandidaten</div><div class="stat-value">18 von maximal 300</div></div><div class="stat-card"><div class="stat-label">Champions</div><div class="stat-value">13</div></div></div>
+      <div class="stat-grid"><div class="stat-card"><div class="stat-label">Gesamtuniversum</div><div class="stat-value">12.216</div></div><div class="stat-card"><div class="stat-label">Investierbares Universum</div><div class="stat-value">5.417</div></div><div class="stat-card"><div class="stat-label">Im letzten Zyklus bewertet</div><div class="stat-value">103</div></div><div class="stat-card"><div class="stat-label">Rotationsabdeckung</div><div class="stat-value">1.792 / 5.417 · 33,08 %</div></div><div class="stat-card"><div class="stat-label">Top-Kandidaten</div><div class="stat-value">18</div></div><div class="stat-card"><div class="stat-label">Champions</div><div class="stat-value">13</div></div><div class="stat-card"><div class="stat-label">Aktuell frisch bewertet</div><div class="stat-value">58</div></div></div>
     </section>
 
     <section class="section">
       <h2 class="section-title">Universe &amp; Ligen</h2>
-      <div class="card"><div class="funnel"><div class="funnel-step"><span class="funnel-label">Marktuniversum</span><span class="funnel-value">12.216</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Investierbar</span><span class="funnel-value">58</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Aktueller Durchlauf</span><span class="funnel-value">21</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Top-Kandidaten</span><span class="funnel-value">18 von max. 300</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Champions</span><span class="funnel-value">13</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Depotpositionen</span><span class="funnel-value">15</span></div></div></div>
+      <div class="card"><p class="funnel-note">TradeVHB analysiert das investierbare Universum in einer kontrollierten Rotation.</p><div class="funnel"><div class="funnel-step"><span class="funnel-label">Marktuniversum</span><span class="funnel-value">12.216</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Investierbar</span><span class="funnel-value">5.417</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Im letzten Zyklus bewertet</span><span class="funnel-value">103</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Aktueller Universe-Durchlauf</span><span class="funnel-value">1.792 / 5.417 · 33,08 %</span></div><div class="funnel-coverage" aria-hidden="true"><span class="funnel-coverage-track"><span class="funnel-coverage-fill" style="width:33.08%"></span></span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Top-Kandidaten</span><span class="funnel-value">18</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Champions</span><span class="funnel-value">13</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Aktuelle Portfolio-Chancen</span><span class="funnel-value">0</span></div><div class="funnel-arrow">↓</div><div class="funnel-step"><span class="funnel-label">Depotpositionen</span><span class="funnel-value">15</span></div></div></div>
     </section>
 
     <section class="section">
@@ -772,7 +796,7 @@ body::before {
     </section>
 
     <footer class="footer">
-      TradeVHB Investor Dashboard · tradevhb_public_v1_2 · nur öffentlicher Datenausschnitt
+      TradeVHB Investor Dashboard · tradevhb_public_v1_3 · nur öffentlicher Datenausschnitt
     </footer>
 
     <div id="drawer" class="drawer" hidden>
@@ -785,7 +809,7 @@ body::before {
     <script type="application/json" id="tradevhb-position-details">[{"symbol": "PXS", "market_value": "2.563,98 EUR", "weight": "2,6 %", "return_pct": "\u2191 +28,40 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "75", "entry_at": "28.08.2026 \u00b7 18:25 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "DAC", "market_value": "2.061,72 EUR", "weight": "2,1 %", "return_pct": "\u2191 +5,28 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "86", "entry_at": "28.08.2026 \u00b7 15:21 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADM", "market_value": "2.019,88 EUR", "weight": "2,0 %", "return_pct": "\u2191 +2,26 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "09.09.2026 \u00b7 15:06 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACHC", "market_value": "2.006,14 EUR", "weight": "2,0 %", "return_pct": "\u2191 +1,04 %", "risk": "R4 \u00b7 Zweitriskanteste Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "06.09.2026 \u00b7 20:33 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACT", "market_value": "2.004,15 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,40 %", "risk": "R2 \u00b7 Zweitsicherste Liga", "classification": "Stark halten", "conviction": "78", "entry_at": "09.09.2026 \u00b7 02:30 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "AEG", "market_value": "1.985,20 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,28 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "83", "entry_at": "11.09.2026 \u00b7 10:30 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "VOYA", "market_value": "1.962,58 EUR", "weight": "2,0 %", "return_pct": "\u2191 +0,71 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Stark halten", "conviction": "78", "entry_at": "11.09.2026 \u00b7 11:37 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADI", "market_value": "1.960,56 EUR", "weight": "2,0 %", "return_pct": "\u2191 +4,43 %", "risk": "R4 \u00b7 Zweitriskanteste Liga", "classification": "Stark halten", "conviction": "84", "entry_at": "09.09.2026 \u00b7 13:00 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ADEA", "market_value": "1.958,55 EUR", "weight": "2,0 %", "return_pct": "\u2193 -1,66 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Stark halten", "conviction": "73", "entry_at": "09.09.2026 \u00b7 11:54 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "AHR", "market_value": "1.941,30 EUR", "weight": "2,0 %", "return_pct": "\u2193 -1,07 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Stark halten", "conviction": "77", "entry_at": "10.09.2026 \u00b7 18:40 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ACMR", "market_value": "1.925,47 EUR", "weight": "1,9 %", "return_pct": "\u2193 -3,07 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Beobachten", "conviction": "48", "entry_at": "07.09.2026 \u00b7 07:14 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ADAM", "market_value": "1.874,15 EUR", "weight": "1,9 %", "return_pct": "\u2193 -6,25 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Halten", "conviction": "66", "entry_at": "09.09.2026 \u00b7 05:43 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "HUM", "market_value": "1.767,60 EUR", "weight": "1,8 %", "return_pct": "\u2191 +5,40 %", "risk": "R3 \u00b7 Mittlere Liga", "classification": "Stark halten", "conviction": "80", "entry_at": "29.08.2026 \u00b7 01:35 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-up"}, {"symbol": "ACRS", "market_value": "1.757,73 EUR", "weight": "1,8 %", "return_pct": "\u2193 -12,12 %", "risk": "R5 \u00b7 Riskanteste Liga", "classification": "Halten", "conviction": "62", "entry_at": "09.09.2026 \u00b7 01:25 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}, {"symbol": "ACHV", "market_value": "1.662,68 EUR", "weight": "1,7 %", "return_pct": "\u2193 -16,73 %", "risk": "R1 \u00b7 Sicherste Liga", "classification": "Beobachten", "conviction": "46", "entry_at": "07.09.2026 \u00b7 06:10 Uhr UTC", "replacement": "\u2014", "dir_class": "dir-down"}]</script>
 
   </div>
-  <script id="tradevhb-public-export-meta" type="application/json">{"executive": {"cash": 69866.09, "depotwert": 99317.7638, "positions": 15}, "identity": {"business_snapshot_at": "2026-09-13 06:11:44.859228+00:00", "canonical_snapshot_id": "phase20_v2-20260913T061143989929Z-1ab93843", "exported_at": "2026-09-13T07:10:52.378652+00:00"}, "schema_version": "tradevhb_public_v1_2"}</script>
+  <script id="tradevhb-public-export-meta" type="application/json">{"executive": {"cash": 69866.09, "depotwert": 99317.7638, "positions": 15}, "identity": {"business_snapshot_at": "2026-09-13T06:11:45.008206+00:00", "canonical_snapshot_id": "phase20_v2-20260913T061143989929Z-1ab93843", "exported_at": "2026-09-13T08:24:14.983897+00:00"}, "schema_version": "tradevhb_public_v1_3"}</script>
   <script>
 
 (function () {
