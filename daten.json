@@ -1,0 +1,360 @@
+{
+ "schema": 1,
+ "kennzeichnung": "Papierdepot mit simulierten Ausführungen – kein Echtgeld-Ergebnis.",
+ "titel": "TradeVHB Papierdepot",
+ "stand": {
+  "handelstag": "2026-11-23",
+  "handelstag_text": "Mo 23.11.2026",
+  "datenstand_text": "Di 24.11.2026 08:08 MEZ",
+  "datenstand_utc": "2026-11-24T07:08:05Z",
+  "erzeugt_utc": "2026-11-24T07:41:38Z"
+ },
+ "start": {
+  "tag": "2026-11-11",
+  "kapital": 100000.0
+ },
+ "kennzahlen": {
+  "depotwert": 98498.16,
+  "seit_start_abs": -1501.84,
+  "seit_start_prozent": -1.5,
+  "cash": 51834.57,
+  "investiert": 46663.59,
+  "anzahl_positionen": 10,
+  "cash_anteil": 52.62,
+  "investiert_anteil": 47.38
+ },
+ "kurve": [
+  {
+   "tag": "2026-11-11",
+   "wert": 100000.0,
+   "cash": 100000.0
+  },
+  {
+   "tag": "2026-11-12",
+   "wert": 99810.7,
+   "cash": 90476.09
+  },
+  {
+   "tag": "2026-11-13",
+   "wert": 99902.81,
+   "cash": 80705.58
+  },
+  {
+   "tag": "2026-11-16",
+   "wert": 99858.38,
+   "cash": 71162.65
+  },
+  {
+   "tag": "2026-11-17",
+   "wert": 99421.81,
+   "cash": 61560.68
+  },
+  {
+   "tag": "2026-11-18",
+   "wert": 99083.59,
+   "cash": 51834.57
+  },
+  {
+   "tag": "2026-11-19",
+   "wert": 98202.22,
+   "cash": 51834.57
+  },
+  {
+   "tag": "2026-11-20",
+   "wert": 98153.41,
+   "cash": 51834.57
+  },
+  {
+   "tag": "2026-11-23",
+   "wert": 98498.16,
+   "cash": 51834.57
+  }
+ ],
+ "zeitraeume": [
+  {
+   "id": "start",
+   "label": "Seit Start",
+   "von": "2026-11-11",
+   "bis": "2026-11-23",
+   "basis_wert": 100000.0,
+   "wert": 98498.16,
+   "abs": -1501.84,
+   "prozent": -1.5
+  },
+  {
+   "id": "tag",
+   "label": "Letzter Handelstag",
+   "von": "2026-11-20",
+   "bis": "2026-11-23",
+   "basis_wert": 98153.41,
+   "wert": 98498.16,
+   "abs": 344.75,
+   "prozent": 0.35
+  },
+  {
+   "id": "fuenf",
+   "label": "Letzte 5 Handelstage",
+   "von": "2026-11-16",
+   "bis": "2026-11-23",
+   "basis_wert": 99858.38,
+   "wert": 98498.16,
+   "abs": -1360.22,
+   "prozent": -1.36
+  },
+  {
+   "id": "woche",
+   "label": "Aktuelle Woche",
+   "von": "2026-11-20",
+   "bis": "2026-11-23",
+   "basis_wert": 98153.41,
+   "wert": 98498.16,
+   "abs": 344.75,
+   "prozent": 0.35
+  }
+ ],
+ "positionen": [
+  {
+   "name": "Becton Dickinson and Company",
+   "kuerzel": "BDX",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 23,
+   "kurs": 215.44,
+   "wert": 4955.12,
+   "anteil": 5.03,
+   "entwicklung": -0.95,
+   "entwicklung_abs": -47.67,
+   "gehalten": 6
+  },
+  {
+   "name": "The Coca-Cola Company",
+   "kuerzel": "KO",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 50,
+   "kurs": 95.88,
+   "wert": 4794.0,
+   "anteil": 4.87,
+   "entwicklung": -3.07,
+   "entwicklung_abs": -151.92,
+   "gehalten": 4
+  },
+  {
+   "name": "Procter & Gamble Company",
+   "kuerzel": "PG",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 28,
+   "kurs": 169.6,
+   "wert": 4748.8,
+   "anteil": 4.82,
+   "entwicklung": -0.43,
+   "entwicklung_abs": -20.47,
+   "gehalten": 3
+  },
+  {
+   "name": "Fastenal Company",
+   "kuerzel": "FAST",
+   "branche": "Einzelhandel",
+   "stueck": 91,
+   "kurs": 52.06,
+   "wert": 4737.46,
+   "anteil": 4.81,
+   "entwicklung": -4.43,
+   "entwicklung_abs": -219.38,
+   "gehalten": 3
+  },
+  {
+   "name": "Republic Services Inc",
+   "kuerzel": "RSG",
+   "branche": "Verkehr, Kommunikation & Versorger",
+   "stueck": 19,
+   "kurs": 247.69,
+   "wert": 4706.11,
+   "anteil": 4.78,
+   "entwicklung": -3.32,
+   "entwicklung_abs": -161.74,
+   "gehalten": 5
+  },
+  {
+   "name": "Cardinal Health Inc",
+   "kuerzel": "CAH",
+   "branche": "Großhandel",
+   "stueck": 17,
+   "kurs": 271.97,
+   "wert": 4623.49,
+   "anteil": 4.69,
+   "entwicklung": -3.03,
+   "entwicklung_abs": -144.23,
+   "gehalten": 6
+  },
+  {
+   "name": "AbbVie Inc",
+   "kuerzel": "ABBV",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 16,
+   "kurs": 288.45,
+   "wert": 4615.2,
+   "anteil": 4.69,
+   "entwicklung": -3.75,
+   "entwicklung_abs": -179.83,
+   "gehalten": 7
+  },
+  {
+   "name": "Automatic Data Processing Inc",
+   "kuerzel": "ADP",
+   "branche": "Dienstleistungen",
+   "stueck": 15,
+   "kurs": 302.11,
+   "wert": 4531.65,
+   "anteil": 4.6,
+   "entwicklung": -2.67,
+   "entwicklung_abs": -124.4,
+   "gehalten": 4
+  },
+  {
+   "name": "Visa Inc. Class A",
+   "kuerzel": "V",
+   "branche": "Dienstleistungen",
+   "stueck": 11,
+   "kurs": 409.4,
+   "wert": 4503.4,
+   "anteil": 4.57,
+   "entwicklung": -4.77,
+   "entwicklung_abs": -225.48,
+   "gehalten": 7
+  },
+  {
+   "name": "Mastercard Inc",
+   "kuerzel": "MA",
+   "branche": "Dienstleistungen",
+   "stueck": 7,
+   "kurs": 635.48,
+   "wert": 4448.36,
+   "anteil": 4.52,
+   "entwicklung": -4.85,
+   "entwicklung_abs": -226.72,
+   "gehalten": 5
+  }
+ ],
+ "cash": {
+  "wert": 51834.57,
+  "anteil": 52.62
+ },
+ "trades": [
+  {
+   "tag": "2026-11-18",
+   "name": "Procter & Gamble Company",
+   "kuerzel": "PG",
+   "seite": "Kauf",
+   "stueck": 28,
+   "preis": 170.25,
+   "volumen": 4766.89,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 1 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-18",
+   "name": "Fastenal Company",
+   "kuerzel": "FAST",
+   "seite": "Kauf",
+   "stueck": 91,
+   "preis": 54.44,
+   "volumen": 4954.36,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 2 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-17",
+   "name": "The Coca-Cola Company",
+   "kuerzel": "KO",
+   "seite": "Kauf",
+   "stueck": 50,
+   "preis": 98.87,
+   "volumen": 4943.45,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 2 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-17",
+   "name": "Automatic Data Processing Inc",
+   "kuerzel": "ADP",
+   "seite": "Kauf",
+   "stueck": 15,
+   "preis": 310.25,
+   "volumen": 4653.72,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 1 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-16",
+   "name": "Republic Services Inc",
+   "kuerzel": "RSG",
+   "seite": "Kauf",
+   "stueck": 19,
+   "preis": 256.07,
+   "volumen": 4865.42,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 2 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-16",
+   "name": "Mastercard Inc",
+   "kuerzel": "MA",
+   "seite": "Kauf",
+   "stueck": 7,
+   "preis": 667.53,
+   "volumen": 4672.74,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 1 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-13",
+   "name": "Cardinal Health Inc",
+   "kuerzel": "CAH",
+   "seite": "Kauf",
+   "stueck": 17,
+   "preis": 280.31,
+   "volumen": 4765.34,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 1 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-13",
+   "name": "Becton Dickinson and Company",
+   "kuerzel": "BDX",
+   "seite": "Kauf",
+   "stueck": 23,
+   "preis": 217.4,
+   "volumen": 5000.29,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 2 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-12",
+   "name": "Visa Inc. Class A",
+   "kuerzel": "V",
+   "seite": "Kauf",
+   "stueck": 11,
+   "preis": 429.68,
+   "volumen": 4726.52,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 2 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  },
+  {
+   "tag": "2026-11-12",
+   "name": "AbbVie Inc",
+   "kuerzel": "ABBV",
+   "seite": "Kauf",
+   "stueck": 16,
+   "preis": 299.54,
+   "volumen": 4792.63,
+   "grund": "Von Claude und GPT gemeinsam ausgewählt (Platz 1 ihrer Rangliste); alle Kaufprüfungen bestanden."
+  }
+ ],
+ "offene_orders": [],
+ "entscheidung": {
+  "tag": "2026-11-23",
+  "text": "An diesem Tag war keine KI-Entscheidung nötig; es wurde nach festem Regelwerk entschieden.",
+  "ergebnis": "Nichts tun"
+ },
+ "luecken": [],
+ "hinweise": [
+  "Papierdepot: Alle Käufe und Verkäufe sind simulierte Ausführungen. Es wird kein echtes Geld eingesetzt und keine echte Order erteilt.",
+  "Entschieden wird zum Börsenschluss, ausgeführt wird simuliert zur nächsten Eröffnung. Offene Orders verändern die Bestände erst bei der Ausführung.",
+  "Simulierte Gebühren und Kursabschläge sind berücksichtigt; Dividenden werden nicht gebucht.",
+  "Vergangene Wertentwicklung ist keine Prognose. Dies ist keine Anlageberatung."
+ ],
+ "erlaeuterung": [
+  "Ein Kauf entsteht so: Zum Börsenschluss wählen Claude und GPT gemeinsam aus den zugelassenen Aktien aus, innerhalb fester Regelgrenzen (zum Beispiel Höchstzahl an Positionen, Haltedauer und Verlustgrenze). Die Ausführung wird zur nächsten Eröffnung simuliert.",
+  "Die Gründe beschreiben nur, wie ein Titel ausgewählt wurde. Sie sind keine Renditeprognose."
+ ]
+}
