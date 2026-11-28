@@ -3,25 +3,25 @@
  "kennzeichnung": "Papierdepot mit simulierten Ausführungen – kein Echtgeld-Ergebnis.",
  "titel": "TradeVHB Papierdepot",
  "stand": {
-  "handelstag": "2026-11-25",
-  "handelstag_text": "Mi 25.11.2026",
-  "datenstand_text": "Do 26.11.2026 08:15 MEZ",
-  "datenstand_utc": "2026-11-26T07:15:04Z",
-  "erzeugt_utc": "2026-11-26T08:07:21Z"
+  "handelstag": "2026-11-27",
+  "handelstag_text": "Fr 27.11.2026",
+  "datenstand_text": "Sa 28.11.2026 07:58 MEZ",
+  "datenstand_utc": "2026-11-28T06:58:07Z",
+  "erzeugt_utc": "2026-11-28T08:08:49Z"
  },
  "start": {
   "tag": "2026-11-11",
   "kapital": 100000.0
  },
  "kennzahlen": {
-  "depotwert": 99858.73,
-  "seit_start_abs": -141.27,
-  "seit_start_prozent": -0.14,
+  "depotwert": 99926.21,
+  "seit_start_abs": -73.79,
+  "seit_start_prozent": -0.07,
   "cash": 51834.57,
-  "investiert": 48024.16,
+  "investiert": 48091.64,
   "anzahl_positionen": 10,
-  "cash_anteil": 51.91,
-  "investiert_anteil": 48.09
+  "cash_anteil": 51.87,
+  "investiert_anteil": 48.13
  },
  "kurve": [
   {
@@ -78,6 +78,11 @@
    "tag": "2026-11-25",
    "wert": 99858.73,
    "cash": 51834.57
+  },
+  {
+   "tag": "2026-11-27",
+   "wert": 99926.21,
+   "cash": 51834.57
   }
  ],
  "zeitraeume": [
@@ -85,41 +90,41 @@
    "id": "start",
    "label": "Seit Start",
    "von": "2026-11-11",
-   "bis": "2026-11-25",
+   "bis": "2026-11-27",
    "basis_wert": 100000.0,
-   "wert": 99858.73,
-   "abs": -141.27,
-   "prozent": -0.14
+   "wert": 99926.21,
+   "abs": -73.79,
+   "prozent": -0.07
   },
   {
    "id": "tag",
    "label": "Letzter Handelstag",
-   "von": "2026-11-24",
-   "bis": "2026-11-25",
-   "basis_wert": 99489.19,
-   "wert": 99858.73,
-   "abs": 369.54,
-   "prozent": 0.37
+   "von": "2026-11-25",
+   "bis": "2026-11-27",
+   "basis_wert": 99858.73,
+   "wert": 99926.21,
+   "abs": 67.48,
+   "prozent": 0.07
   },
   {
    "id": "fuenf",
    "label": "Letzte 5 Handelstage",
-   "von": "2026-11-18",
-   "bis": "2026-11-25",
-   "basis_wert": 99083.59,
-   "wert": 99858.73,
-   "abs": 775.14,
-   "prozent": 0.78
+   "von": "2026-11-19",
+   "bis": "2026-11-27",
+   "basis_wert": 98202.22,
+   "wert": 99926.21,
+   "abs": 1723.99,
+   "prozent": 1.76
   },
   {
    "id": "woche",
    "label": "Aktuelle Woche",
    "von": "2026-11-20",
-   "bis": "2026-11-25",
+   "bis": "2026-11-27",
    "basis_wert": 98153.41,
-   "wert": 99858.73,
-   "abs": 1705.32,
-   "prozent": 1.74
+   "wert": 99926.21,
+   "abs": 1772.8,
+   "prozent": 1.81
   }
  ],
  "positionen": [
@@ -128,47 +133,23 @@
    "kuerzel": "BDX",
    "branche": "Verarbeitendes Gewerbe",
    "stueck": 23,
-   "kurs": 221.24,
-   "wert": 5088.52,
-   "anteil": 5.1,
-   "entwicklung": 1.71,
-   "entwicklung_abs": 85.73,
-   "gehalten": 8
+   "kurs": 219.36,
+   "wert": 5045.28,
+   "anteil": 5.05,
+   "entwicklung": 0.85,
+   "entwicklung_abs": 42.49,
+   "gehalten": 9
   },
   {
    "name": "The Coca-Cola Company",
    "kuerzel": "KO",
    "branche": "Verarbeitendes Gewerbe",
    "stueck": 50,
-   "kurs": 97.59,
-   "wert": 4879.5,
-   "anteil": 4.89,
-   "entwicklung": -1.34,
-   "entwicklung_abs": -66.42,
-   "gehalten": 6
-  },
-  {
-   "name": "Procter & Gamble Company",
-   "kuerzel": "PG",
-   "branche": "Verarbeitendes Gewerbe",
-   "stueck": 28,
-   "kurs": 173.23,
-   "wert": 4850.44,
-   "anteil": 4.86,
-   "entwicklung": 1.7,
-   "entwicklung_abs": 81.17,
-   "gehalten": 5
-  },
-  {
-   "name": "Republic Services Inc",
-   "kuerzel": "RSG",
-   "branche": "Verkehr, Kommunikation & Versorger",
-   "stueck": 19,
-   "kurs": 254.16,
-   "wert": 4829.04,
-   "anteil": 4.84,
-   "entwicklung": -0.8,
-   "entwicklung_abs": -38.81,
+   "kurs": 97.4,
+   "wert": 4870.0,
+   "anteil": 4.87,
+   "entwicklung": -1.54,
+   "entwicklung_abs": -75.92,
    "gehalten": 7
   },
   {
@@ -176,77 +157,101 @@
    "kuerzel": "FAST",
    "branche": "Einzelhandel",
    "stueck": 91,
-   "kurs": 52.93,
-   "wert": 4816.63,
+   "kurs": 53.41,
+   "wert": 4860.31,
+   "anteil": 4.86,
+   "entwicklung": -1.95,
+   "entwicklung_abs": -96.53,
+   "gehalten": 6
+  },
+  {
+   "name": "Procter & Gamble Company",
+   "kuerzel": "PG",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 28,
+   "kurs": 172.86,
+   "wert": 4840.08,
+   "anteil": 4.84,
+   "entwicklung": 1.48,
+   "entwicklung_abs": 70.81,
+   "gehalten": 6
+  },
+  {
+   "name": "Republic Services Inc",
+   "kuerzel": "RSG",
+   "branche": "Verkehr, Kommunikation & Versorger",
+   "stueck": 19,
+   "kurs": 253.26,
+   "wert": 4811.94,
    "anteil": 4.82,
-   "entwicklung": -2.83,
-   "entwicklung_abs": -140.21,
-   "gehalten": 5
+   "entwicklung": -1.15,
+   "entwicklung_abs": -55.91,
+   "gehalten": 8
   },
   {
    "name": "Cardinal Health Inc",
    "kuerzel": "CAH",
    "branche": "Großhandel",
    "stueck": 17,
-   "kurs": 282.91,
-   "wert": 4809.47,
-   "anteil": 4.82,
-   "entwicklung": 0.88,
-   "entwicklung_abs": 41.75,
-   "gehalten": 8
+   "kurs": 282.86,
+   "wert": 4808.62,
+   "anteil": 4.81,
+   "entwicklung": 0.86,
+   "entwicklung_abs": 40.9,
+   "gehalten": 9
   },
   {
    "name": "Automatic Data Processing Inc",
    "kuerzel": "ADP",
    "branche": "Dienstleistungen",
    "stueck": 15,
-   "kurs": 316.72,
-   "wert": 4750.8,
-   "anteil": 4.76,
-   "entwicklung": 2.03,
-   "entwicklung_abs": 94.75,
-   "gehalten": 6
-  },
-  {
-   "name": "AbbVie Inc",
-   "kuerzel": "ABBV",
-   "branche": "Verarbeitendes Gewerbe",
-   "stueck": 16,
-   "kurs": 294.48,
-   "wert": 4711.68,
-   "anteil": 4.72,
-   "entwicklung": -1.74,
-   "entwicklung_abs": -83.35,
-   "gehalten": 9
+   "kurs": 319.43,
+   "wert": 4791.45,
+   "anteil": 4.79,
+   "entwicklung": 2.91,
+   "entwicklung_abs": 135.4,
+   "gehalten": 7
   },
   {
    "name": "Visa Inc. Class A",
    "kuerzel": "V",
    "branche": "Dienstleistungen",
    "stueck": 11,
-   "kurs": 424.39,
-   "wert": 4668.29,
+   "kurs": 429.56,
+   "wert": 4725.16,
+   "anteil": 4.73,
+   "entwicklung": -0.08,
+   "entwicklung_abs": -3.72,
+   "gehalten": 10
+  },
+  {
+   "name": "AbbVie Inc",
+   "kuerzel": "ABBV",
+   "branche": "Verarbeitendes Gewerbe",
+   "stueck": 16,
+   "kurs": 291.88,
+   "wert": 4670.08,
    "anteil": 4.67,
-   "entwicklung": -1.28,
-   "entwicklung_abs": -60.59,
-   "gehalten": 9
+   "entwicklung": -2.61,
+   "entwicklung_abs": -124.95,
+   "gehalten": 10
   },
   {
    "name": "Mastercard Inc",
    "kuerzel": "MA",
    "branche": "Dienstleistungen",
    "stueck": 7,
-   "kurs": 659.97,
-   "wert": 4619.79,
-   "anteil": 4.63,
-   "entwicklung": -1.18,
-   "entwicklung_abs": -55.29,
-   "gehalten": 7
+   "kurs": 666.96,
+   "wert": 4668.72,
+   "anteil": 4.67,
+   "entwicklung": -0.14,
+   "entwicklung_abs": -6.36,
+   "gehalten": 8
   }
  ],
  "cash": {
   "wert": 51834.57,
-  "anteil": 51.91
+  "anteil": 51.87
  },
  "trades": [
   {
@@ -352,7 +357,7 @@
  ],
  "offene_orders": [],
  "entscheidung": {
-  "tag": "2026-11-25",
+  "tag": "2026-11-27",
   "text": "An diesem Tag war keine KI-Entscheidung nötig; es wurde nach festem Regelwerk entschieden.",
   "ergebnis": "Nichts tun"
  },
